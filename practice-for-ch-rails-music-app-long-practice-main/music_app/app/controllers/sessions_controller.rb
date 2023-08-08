@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    before_action :require_logged_out, only: [:new, :create]
+    # before_action :require_logged_out, only: [:new, :create]
     before_action :require_logged_in, only: [:destroy]
 
     def new
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
         )
         if @user
             login!(@user)
-            redirect_to user_url
+            redirect_to user_url(@user)
         else
             @user = User.new(email: params[:user][:email])
             render :new
